@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\"",
     "prepare": "husky install"
   },
   "keywords": [],
@@ -21,5 +21,9 @@
     "husky": "^8.0.2",
     "prettier": "^2.7.1",
     "typescript": "^4.8.4"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.6.1",
+    "prisma": "^4.6.1"
   }
 }
