@@ -1,7 +1,7 @@
 export default {
   clearMocks: true,
   collectCoverage: false,
-  roots: ['<rootDir>/test'],
+  roots: ['<rootDir>/tests'],
   collectCoverageFrom: ['<rootDir>./test/**/*.ts'],
   transform: {
     '.+\\.ts$': 'ts-jest'
