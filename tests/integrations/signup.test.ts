@@ -43,4 +43,17 @@ describe('Signup', () => {
       error: 'please enter a password'
     })
   })
+  it('should call router/signup as password less than 8 characters and get error with status 422', async () => {
+    const response = await supertest(app)
+      .post('/signup')
+      .send({
+        username: faker.name.firstName(),
+        password: faker.internet.password(8).substring(0, 7)
+      })
+
+    expect(response.status).toBe(422)
+    expect(response.body).toEqual({
+      error: 'password must have at least 8 characters'
+    })
+  })
 })
