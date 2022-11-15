@@ -19,4 +19,17 @@ describe('Signup', () => {
     expect(response.status).toBe(422)
     expect(response.body).toEqual({ error: 'please enter a username' })
   })
+  it('should call router/signup as username less than 3 characters and get error with status 422', async () => {
+    const response = await supertest(app)
+      .post('/signup')
+      .send({
+        username: faker.name.firstName().substring(0, 2),
+        password: faker.internet.password(8)
+      })
+
+    expect(response.status).toBe(422)
+    expect(response.body).toEqual({
+      error: 'username must be at least 3 characters long'
+    })
+  })
 })
