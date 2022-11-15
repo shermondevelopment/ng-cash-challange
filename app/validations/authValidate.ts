@@ -1,7 +1,13 @@
 import * as Joi from 'joi'
 
 export const signupSchema = Joi.object({
-  username: Joi.string().min(3).required(),
+  username: Joi.string()
+    .min(3)
+    .message('username must be at least 3 characters long')
+    .required()
+    .messages({
+      'string.empty': 'please enter a username'
+    }),
   password: Joi.string()
     .min(8)
     .regex(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?!.* ).{8,16}$/)
