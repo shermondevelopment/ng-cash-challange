@@ -32,4 +32,15 @@ describe('Signup', () => {
       error: 'username must be at least 3 characters long'
     })
   })
+  it('should call the router/signup with empty password and receive an error with status 422', async () => {
+    const response = await supertest(app).post('/signup').send({
+      username: faker.name.firstName().toLocaleLowerCase(),
+      password: ''
+    })
+
+    expect(response.status).toBe(422)
+    expect(response.body).toEqual({
+      error: 'please enter a password'
+    })
+  })
 })
