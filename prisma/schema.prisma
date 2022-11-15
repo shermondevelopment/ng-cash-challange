@@ -13,6 +13,8 @@ model Accounts {
   user                 Users?
   TransactionsCredited Transactions[] @relation("credited")
   TransactionsDebited  Transactions[] @relation("debited")
+
+  @@map("accounts")
 }
 
 model Users {
@@ -21,6 +23,8 @@ model Users {
   password  String
   account   Accounts @relation(fields: [accountId], references: [id])
   accountId String   @unique
+
+  @@map("users")
 }
 
 model Transactions {
@@ -31,4 +35,6 @@ model Transactions {
   created_at        DateTime @default(now())
   account_debited   Accounts @relation("debited", fields: [debitedAccountId], references: [id])
   account_credited  Accounts @relation("credited", fields: [creditedAccountId], references: [id])
+
+  @@map("transactions")
 }

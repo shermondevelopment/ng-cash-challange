@@ -3,11 +3,21 @@ import { faker } from '@faker-js/faker'
 
 /** supertest */
 import supertest from 'supertest'
+import prisma from '../../app/config/prisma'
 
 /** server */
 import app from '../../app/config/server'
 
 describe('Signup', () => {
+  beforeEach(async () => {
+    await prisma.$executeRaw`TRUNCATE TABLE users RESTART IDENTITY CASCADE`
+    await prisma.$executeRaw`TRUNCATE TABLE transactions`
+  })
+
+  afterAll(async () => {
+    await prisma.$disconnect()
+  })
+
   it('should call router /signup how username empty and receive error with status 422', async () => {
     const response = await supertest(app)
       .post('/signup')
@@ -81,7 +91,6 @@ describe('Signup', () => {
     })
   })
   it('should call the router/signup with username and password valid and receive status 201', async () => {
-    console.log(faker.internet.password(8))
     const response = await supertest(app).post('/signup').send({
       username: faker.name.firstName(),
       password: 'Mock0202'
