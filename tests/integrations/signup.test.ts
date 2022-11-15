@@ -80,4 +80,13 @@ describe('Signup', () => {
       error: 'the password must have at least one capital letter and one number'
     })
   })
+  it('should call the router/signup with username and password valid and receive status 201', async () => {
+    console.log(faker.internet.password(8))
+    const response = await supertest(app).post('/signup').send({
+      username: faker.name.firstName(),
+      password: 'Mock0202'
+    })
+
+    expect(response.status).toBe(201)
+  })
 })
