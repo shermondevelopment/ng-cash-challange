@@ -1,6 +1,9 @@
 /** repository */
 import { searchUser, createUser } from '../repositories/userRepository'
 
+/** bctypt */
+import bcrypt from 'bcrypt'
+
 /** utils */
 import { AppError } from '../utils/appError'
 
@@ -16,7 +19,7 @@ const signupService = async (user: UserParams) => {
     AppError(401, 'username already exists')
   }
 
-  await createUser(user.username, user.password)
+  await createUser(user.username, await bcrypt.hash(user.password, 12))
 }
 
 export default signupService
