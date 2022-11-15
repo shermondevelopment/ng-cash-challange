@@ -61,8 +61,19 @@ describe('Signup', () => {
       .post('/signup')
       .send({
         username: faker.name.firstName(),
-        password: faker.internet.password(8, true, /[A-Z]/)
+        password: faker.internet.password(8, false, /[A-Z]/)
       })
+
+    expect(response.status).toBe(422)
+    expect(response.body).toEqual({
+      error: 'the password must have at least one capital letter and one number'
+    })
+  })
+  it('should call the router/signup as a password with 8 characters and no capital letter and receive error with status 422', async () => {
+    const response = await supertest(app).post('/signup').send({
+      username: faker.name.firstName(),
+      password: 'mock0202'
+    })
 
     expect(response.status).toBe(422)
     expect(response.body).toEqual({
