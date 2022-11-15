@@ -4,8 +4,6 @@ import { Request, Response } from 'express'
 import signupService from '../services/signupService'
 
 const SignupController = async (req: Request, res: Response) => {
-  console.log(req.body)
-
   const { username, password } = req.body
   await signupService({ username, password })
 
