@@ -6,3 +6,29 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Accounts {
+  id                   String         @id @default(uuid())
+  balance              Float          @default(100)
+  user                 Users?
+  TransactionsCredited Transactions[] @relation("credited")
+  TransactionsDebited  Transactions[] @relation("debited")
+}
+
+model Users {
+  id        String   @id @default(uuid())
+  username  String   @unique
+  password  String
+  account   Accounts @relation(fields: [accountId], references: [id])
+  accountId String   @unique
+}
+
+model Transactions {
+  id                String   @id @default(uuid())
+  debitedAccountId  String
+  creditedAccountId String
+  value             Float
+  created_at        DateTime @default(now())
+  account_debited   Accounts @relation("debited", fields: [debitedAccountId], references: [id])
+  account_credited  Accounts @relation("credited", fields: [creditedAccountId], references: [id])
+}
