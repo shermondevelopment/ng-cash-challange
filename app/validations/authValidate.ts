@@ -19,3 +19,12 @@ export const signupSchema = Joi.object({
         'the password must have at least one capital letter and one number'
     })
 })
+
+export const signinSchema = Joi.object({
+  username: Joi.string().required().messages({
+    'string.empty': 'please enter a username'
+  }),
+  password: Joi.string().messages({
+    'string.empty': 'please enter a password'
+  })
+})

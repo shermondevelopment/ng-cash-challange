@@ -3,6 +3,8 @@ import { faker } from '@faker-js/faker'
 
 /** supertest */
 import supertest from 'supertest'
+
+/** connection with prisma */
 import prisma from '../../app/config/prisma'
 
 /** server */
