@@ -26,4 +26,14 @@ describe('Signin', () => {
     expect(response.status).toBe(422)
     expect(response.body).toEqual({ error: 'please enter a username' })
   })
+
+  it('should call router /signin how password empty and receive error with status ', async () => {
+    const response = await supertest(app).post('/signin').send({
+      username: 'mockuser',
+      password: ''
+    })
+
+    expect(response.status).toBe(422)
+    expect(response.body).toEqual({ error: 'please enter a password' })
+  })
 })
