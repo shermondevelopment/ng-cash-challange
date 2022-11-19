@@ -20,4 +20,17 @@ const createUser = async (username: string, password: string) => {
   })
 }
 
-export { searchUser, createUser }
+const findBalance = async (id: string) => {
+  return await prisma.users.findFirst({
+    where: { id },
+    select: {
+      account: {
+        select: {
+          balance: true
+        }
+      }
+    }
+  })
+}
+
+export { searchUser, createUser, findBalance }
