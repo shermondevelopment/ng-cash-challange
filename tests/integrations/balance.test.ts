@@ -19,4 +19,9 @@ describe('Balance', () => {
     expect(response.status).toBe(401)
     expect(response.body).toEqual({ error: 'badly formatted token' })
   })
+  it('should call router /balance not providing token  and receive error 401', async () => {
+    const response = await supertest(app).get('/balance').send()
+    expect(response.status).toBe(401)
+    expect(response.body).toEqual({ error: 'providing a token' })
+  })
 })
