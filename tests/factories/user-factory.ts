@@ -15,3 +15,11 @@ export const createUser = async () => {
     }
   })
 }
+
+export const signinUser = async () => {
+  return await prisma.users.findFirst({
+    where: {
+      username: 'mockuser'
+    }
+  })
+}

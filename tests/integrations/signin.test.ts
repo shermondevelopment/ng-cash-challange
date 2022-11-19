@@ -18,6 +18,7 @@ describe('Signin', () => {
   afterAll(async () => {
     await prisma.$executeRaw`TRUNCATE TABLE users RESTART IDENTITY CASCADE`
     await prisma.$executeRaw`TRUNCATE TABLE transactions`
+    await prisma.$executeRaw`TRUNCATE TABLE accounts RESTART IDENTITY CASCADE`
     await prisma.$disconnect()
   })
 
