@@ -1,0 +1,22 @@
+import { Router } from 'express'
+
+/** controller */
+import CashInController from '../controllers/cash'
+
+/** middlewares */
+import tokenMiddleware from '../middlewares/token-middleware'
+import validationMiddleware from '../middlewares/validation-middleware'
+
+/** validation */
+import { cashOutSchema } from '../validations/cashInValidate'
+
+const routerCashOut = Router()
+
+routerCashOut.post(
+  '/cash-out',
+  tokenMiddleware,
+  validationMiddleware(cashOutSchema),
+  CashInController
+)
+
+export default routerCashOut

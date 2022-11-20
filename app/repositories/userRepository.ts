@@ -26,7 +26,8 @@ const findBalance = async (id: string) => {
     select: {
       account: {
         select: {
-          balance: true
+          balance: true,
+          id: true
         }
       }
     }
