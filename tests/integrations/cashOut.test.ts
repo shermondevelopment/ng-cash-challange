@@ -75,4 +75,17 @@ describe('CashOut', () => {
       error: 'you do not have enough balance to carry out this operation'
     })
   })
+  it('should call the router /cash-out with the withdrawal amount for the user himself and get the error 400', async () => {
+    const response = await supertest(app)
+      .post('/cash-out')
+      .send({
+        username: 'mockuser',
+        value: 100
+      })
+      .set('Authorization', `Bearer ${token(idUser)}`)
+    expect(response.status).toBe(400)
+    expect(response.body).toEqual({
+      error: 'you cannot make this transaction for yourself'
+    })
+  })
 })
