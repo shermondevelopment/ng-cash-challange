@@ -48,4 +48,17 @@ describe('CashOut', () => {
       error: 'please enter a value equal to 1 or greater'
     })
   })
+  it('should call router /cash-out with value of type string receive error 422', async () => {
+    const response = await supertest(app)
+      .post('/cash-out')
+      .send({
+        username: 'mockuser',
+        value: ''
+      })
+      .set('Authorization', `Bearer ${token(idUser)}`)
+    expect(response.status).toBe(422)
+    expect(response.body).toEqual({
+      error: 'value field and number type'
+    })
+  })
 })
