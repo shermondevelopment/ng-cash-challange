@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  db_ng_cash:
+    container_name: db_cash
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    env_file:
+     - .env
+  api_ng_cash:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - "db_ng_cash"
+    env_file:
+     - .env

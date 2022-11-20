@@ -5,8 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --passWithNoTests -i",
+    "build": "tsc",
+    "up": "npm run build",
+    "prisma:seed": "prisma db seed",
+    "prisma:migrate": "prisma migrate dev",
     "prepare": "husky install",
-    "dev": "tsnd app/server.ts"
+    "dev": "tsnd app/server.ts",
+    "start": "npm run prisma:migrate && node dist/app/server.js"
   },
   "keywords": [],
   "author": "",
