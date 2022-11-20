@@ -35,4 +35,17 @@ describe('CashOut', () => {
     expect(response.status).toBe(422)
     expect(response.body).toEqual({ error: 'Please enter your username' })
   })
+  it('should call router /cash-out with value less than 1 and receive error 422', async () => {
+    const response = await supertest(app)
+      .post('/cash-out')
+      .send({
+        username: 'mockuser',
+        value: 0
+      })
+      .set('Authorization', `Bearer ${token(idUser)}`)
+    expect(response.status).toBe(422)
+    expect(response.body).toEqual({
+      error: 'please enter a value equal to 1 or greater'
+    })
+  })
 })
