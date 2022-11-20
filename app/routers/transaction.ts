@@ -1,7 +1,10 @@
 import { Router } from 'express'
 
 /** controllers */
-import ListTransactionController from '../controllers/transaction'
+import {
+  ListTransactionController,
+  FilterTransactionController
+} from '../controllers/transaction'
 
 /** middleware */
 import tokenMiddleware from '../middlewares/token-middleware'
@@ -12,6 +15,11 @@ routerTransaction.get(
   '/transactions',
   tokenMiddleware,
   ListTransactionController
+)
+routerTransaction.get(
+  '/transactions/filter',
+  tokenMiddleware,
+  FilterTransactionController
 )
 
 export default routerTransaction
