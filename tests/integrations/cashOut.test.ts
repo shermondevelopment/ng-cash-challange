@@ -61,4 +61,18 @@ describe('CashOut', () => {
       error: 'value field and number type'
     })
   })
+  it('should call router /cash-out with insufficient value and receive error 400', async () => {
+    const user = await createUser('mockuser2', 'Senha@0202')
+    const response = await supertest(app)
+      .post('/cash-out')
+      .send({
+        username: 'mockuser',
+        value: 200
+      })
+      .set('Authorization', `Bearer ${token(user.id)}`)
+    expect(response.status).toBe(400)
+    expect(response.body).toEqual({
+      error: 'you do not have enough balance to carry out this operation'
+    })
+  })
 })
