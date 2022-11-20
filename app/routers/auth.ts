@@ -12,7 +12,15 @@ import { signupSchema, signinSchema } from '../validations/authValidate'
 
 const routerAuth = Router()
 
-routerAuth.post('/signup', validationMiddleware(signupSchema), SignupController)
-routerAuth.post('/signin', validationMiddleware(signinSchema), SigninController)
+routerAuth.post(
+  '/signup',
+  validationMiddleware(signupSchema, 'body'),
+  SignupController
+)
+routerAuth.post(
+  '/signin',
+  validationMiddleware(signinSchema, 'body'),
+  SigninController
+)
 
 export default routerAuth

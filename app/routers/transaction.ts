@@ -8,6 +8,8 @@ import {
 
 /** middleware */
 import tokenMiddleware from '../middlewares/token-middleware'
+import validationMiddleware from '../middlewares/validation-middleware'
+import { filterSchema } from '../validations/filterValidate'
 
 const routerTransaction = Router()
 
@@ -19,6 +21,7 @@ routerTransaction.get(
 routerTransaction.get(
   '/transactions/filter',
   tokenMiddleware,
+  validationMiddleware(filterSchema, 'query'),
   FilterTransactionController
 )
 

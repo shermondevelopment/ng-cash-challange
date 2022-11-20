@@ -15,7 +15,7 @@ const routerCashOut = Router()
 routerCashOut.post(
   '/cash-out',
   tokenMiddleware,
-  validationMiddleware(cashOutSchema),
+  validationMiddleware(cashOutSchema, 'body'),
   CashInController
 )
 

@@ -6,9 +6,11 @@ import { ObjectSchema } from 'joi'
 /** utils */
 import { AppError } from '../utils/appError'
 
-export default (schema: ObjectSchema) => {
+type validateObject = 'body' | 'query'
+
+export default (schema: ObjectSchema, filter: validateObject) => {
   return (req: Request, res: Response, next: NextFunction) => {
-    const { error } = schema.validate(req.body, { abortEarly: false })
+    const { error } = schema.validate(req[filter], { abortEarly: false })
     if (error) {
       AppError(422, error.details[0]?.message)
     }
