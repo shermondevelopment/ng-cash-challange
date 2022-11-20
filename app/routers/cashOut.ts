@@ -8,7 +8,7 @@ import tokenMiddleware from '../middlewares/token-middleware'
 import validationMiddleware from '../middlewares/validation-middleware'
 
 /** validation */
-import { cashOutSchema } from '../validations/cashInValidate'
+import { cashOutSchema } from '../validations/cashOutValidate'
 
 const routerCashOut = Router()
 
