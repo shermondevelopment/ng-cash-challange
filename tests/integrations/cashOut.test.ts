@@ -4,6 +4,9 @@ import supertest from 'supertest'
 /** connection with prisma */
 import prisma from '../../app/config/prisma'
 
+/** faker */
+import { faker } from '@faker-js/faker'
+
 /** app */
 import app from '../../app/config/server'
 
@@ -19,9 +22,9 @@ describe('CashOut', () => {
     idUser = user.id
   })
   afterAll(async () => {
-    await prisma.$executeRaw`TRUNCATE TABLE users RESTART IDENTITY CASCADE`
-    await prisma.$executeRaw`TRUNCATE TABLE transactions`
-    await prisma.$executeRaw`TRUNCATE TABLE accounts RESTART IDENTITY CASCADE`
+    // await prisma.$executeRaw`TRUNCATE TABLE users RESTART IDENTITY CASCADE`
+    // await prisma.$executeRaw`TRUNCATE TABLE transactions`
+    // await prisma.$executeRaw`TRUNCATE TABLE accounts RESTART IDENTITY CASCADE`
     await prisma.$disconnect()
   })
   it('should call router /cash-out with username empty and receive erro 422', async () => {
@@ -87,5 +90,20 @@ describe('CashOut', () => {
     expect(response.body).toEqual({
       error: 'you cannot make this transaction for yourself'
     })
+  })
+  it('should call router /cash-out with values correct and receive status 200', async () => {
+    const userDebitedValue = await createUser(
+      faker.name.firstName(),
+      'Senha@0202'
+    )
+    const response = await supertest(app)
+      .post('/cash-out')
+      .send({
+        username: 'mockuser',
+        value: 100
+      })
+      .set('Authorization', `Bearer ${token(userDebitedValue.id)}`)
+
+    expect(response.status).toBe(200)
   })
 })
