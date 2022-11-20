@@ -19,7 +19,7 @@ import { Users } from '@prisma/client'
 
 describe('Balance', () => {
   beforeAll(async () => {
-    await createUser()
+    await createUser('mockuser', 'Senha@0101')
   })
 
   afterAll(async () => {

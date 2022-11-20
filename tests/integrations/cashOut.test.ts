@@ -15,7 +15,7 @@ let idUser = ''
 
 describe('CashOut', () => {
   beforeAll(async () => {
-    const user = await createUser()
+    const user = await createUser('mockuser', 'Senha@0101')
     idUser = user.id
   })
   afterAll(async () => {

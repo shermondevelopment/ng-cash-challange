@@ -12,7 +12,7 @@ import { createUser } from '../factories/user-factory'
 
 describe('Signin', () => {
   beforeAll(async () => {
-    await createUser()
+    await createUser('mockuser', 'Senha@0101')
   })
 
   afterAll(async () => {
