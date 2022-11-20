@@ -22,9 +22,9 @@ describe('CashOut', () => {
     idUser = user.id
   })
   afterAll(async () => {
-    // await prisma.$executeRaw`TRUNCATE TABLE users RESTART IDENTITY CASCADE`
-    // await prisma.$executeRaw`TRUNCATE TABLE transactions`
-    // await prisma.$executeRaw`TRUNCATE TABLE accounts RESTART IDENTITY CASCADE`
+    await prisma.$executeRaw`TRUNCATE TABLE users RESTART IDENTITY CASCADE`
+    await prisma.$executeRaw`TRUNCATE TABLE transactions`
+    await prisma.$executeRaw`TRUNCATE TABLE accounts RESTART IDENTITY CASCADE`
     await prisma.$disconnect()
   })
   it('should call router /cash-out with username empty and receive erro 422', async () => {
