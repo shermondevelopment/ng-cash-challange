@@ -77,12 +77,6 @@ GET /transactions/filter (authenticated)
 
 ---
 
-## ⌛⌛⌛ running test of integration
-
-```
-npm run test
-```
-
 ## 🏁 running the application with docker
 
 ```
