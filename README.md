@@ -13,7 +13,7 @@
 
 ---
 
-## :rocket: Rotas
+## :rocket: Routers
 
 ```yml
 POST /signup
