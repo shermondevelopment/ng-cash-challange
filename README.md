@@ -82,3 +82,7 @@ GET /transactions/filter (authenticated)
 ```
 docker-compose up -d
 ```
+
+```
+app running by default on port 5000 🚀🚀🚀🚀🚀
+```
